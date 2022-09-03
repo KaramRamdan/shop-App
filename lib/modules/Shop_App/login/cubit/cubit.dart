@@ -10,33 +10,32 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
   static ShopLoginCubit get(context) => BlocProvider.of(context);
 
   ShopLoginModel? loginModel;
-  void userLogin( {
-  required String email,
-  required String password,
-})
-  {
+  void userLogin({
+    required String email,
+    required String password,
+  }) {
     emit(ShopLoginLoadingState());
     DioHelper.postData(
-        url: LOGIN,
-        data: {
-          'email':email,
-          'password':password,
-
-        },
-    ).then((value){
-    loginModel=ShopLoginModel.fromJson(value.data);
+      url: LOGIN,
+      data: {
+        'email': email,
+        'password': password,
+      },
+    ).then((value) {
+      loginModel = ShopLoginModel.fromJson(value.data);
       emit(ShopLoginSuccessState(loginModel!));
-    }).catchError((error){
-      print(error);
+    }).catchError((error) {
+      debugPrint(error);
       emit(ShopLoginErrorState(error.toString()));
     });
   }
 
-  IconData suffix=Icons.visibility_outlined;
-  bool isPassword=true;
-  void changePasswordVisibility(){
-    isPassword=!isPassword;
-    suffix=isPassword? Icons.visibility_outlined:Icons.visibility_off_outlined;
- emit(ShopChangePasswordVisibilityState());
+  IconData suffix = Icons.visibility_outlined;
+  bool isPassword = true;
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix =
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    emit(ShopChangePasswordVisibilityState());
   }
 }
