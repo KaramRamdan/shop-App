@@ -1,5 +1,3 @@
-// ignore: file_names
-// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/Shop_App/Cubit/cubit.dart';
 import 'package:shop_app/layout/Shop_App/Cubit/status.dart';
@@ -8,6 +6,8 @@ import 'package:shop_app/shared/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShopLayout extends StatelessWidget {
+  const ShopLayout({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -22,17 +22,16 @@ class ShopLayout extends StatelessWidget {
           var cubit = ShopCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: Text('Shop'),
+              title: const Text('Shop'),
               actions: [
                 IconButton(
                   onPressed: () {
-                    navigateTo(context, ShopSearchScreen());
+                    navigateTo(context, const ShopSearchScreen());
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.search,
                   ),
                 ),
-
               ],
             ),
             body: cubit.bottomScreens[cubit.currentIndex],

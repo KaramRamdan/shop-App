@@ -50,9 +50,9 @@ class ShopCubit extends Cubit<ShopStates> {
   ];
 
   List<Widget> bottomScreens = [
-    ProductsScreen(),
-    CategoriesScreen(),
-    FavoritesScreen(),
+    const ProductsScreen(),
+    const CategoriesScreen(),
+    const FavoritesScreen(),
     SettingScreen(),
   ];
   void changeBottom(int index) {
@@ -71,16 +71,15 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
-      homeModel!.data!.products!.forEach((element) {
+      for (var element in homeModel!.data!.products!) {
         favorites.addAll({
           element.id!: element.inFavorites!,
         });
-
-      });
+      }
 
       emit(ShopSuccessHomeState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ShopErrorHomeState());
     });
   }
@@ -94,7 +93,7 @@ class ShopCubit extends Cubit<ShopStates> {
       categoriesModel = CategoriesModel.fromJson(value.data);
       emit(ShopSuccessCategoriesState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ShopErrorCategoriesState());
     });
   }
@@ -113,7 +112,7 @@ class ShopCubit extends Cubit<ShopStates> {
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
       if (!changeFavoritesModel!.status!) {
         favorites[productsId] = !favorites[productsId]!;
-      }else{
+      } else {
         getFavorites();
       }
       emit(ShopSuccessChangeFavoritesState(changeFavoritesModel!));
@@ -123,64 +122,58 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-FavoritesModel? favoritesModel  ;
+  FavoritesModel? favoritesModel;
   void getFavorites() {
     emit(ShopLoadingGetFavoritesState());
     DioHelper.getData(
-      url:  FAVORITES,
+      url: FAVORITES,
       token: token,
     ).then((value) {
       favoritesModel = FavoritesModel.fromJson(value.data);
       emit(ShopSuccessGetFavoritesState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ShopErrorGetFavoritesState());
     });
   }
 
-  ShopLoginModel? userModel ;
+  ShopLoginModel? userModel;
   void getUserData() {
     emit(ShopLoadingUserDataState());
     DioHelper.getData(
-      url:  PROFILE,
+      url: PROFILE,
       token: token,
     ).then((value) {
       userModel = ShopLoginModel.fromJson(value.data);
       emit(ShopSuccessUserDataState(userModel!));
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ShopErrorUserDataState());
     });
-
   }
 
   void updateUserData({
-  required String? name,
-  required String? phone,
-  required String? email,
-
-      })
-{
+    required String? name,
+    required String? phone,
+    required String? email,
+  }) {
     emit(ShopLoadingUpdateUserState());
     DioHelper.putData(
       url: UPDATE_PROFILE,
       token: token,
       data: {
-        'name':name,
-        'phone':phone,
-        'email':email,
+        'name': name,
+        'phone': phone,
+        'email': email,
       },
     ).then((value) {
       userModel = ShopLoginModel.fromJson(value.data);
       emit(ShopSuccessUpdateUserState(userModel!));
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ShopErrorUpdateUserState());
     });
-
   }
-
-
 
   bool isDark = false;
   void changeAppMode({bool? fromShared}) {

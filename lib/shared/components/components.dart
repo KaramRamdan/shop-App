@@ -11,17 +11,15 @@ Widget defaultButton({
   required String text,
   bool isUpperCase = true,
   double radius = 10.0,
-  Color textColor=Colors.white,
+  Color textColor = Colors.white,
 }) =>
     Container(
-
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       width: width,
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         color: background,
-
       ),
       child: MaterialButton(
         onPressed: function,
@@ -30,7 +28,7 @@ Widget defaultButton({
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
-            color:textColor,
+            color: textColor,
           ),
         ),
       ),
@@ -79,17 +77,11 @@ Widget defaultFormField({
             suffix,
           ),
         ),
-        border:  OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30)
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
     );
 
-
-
-
-Widget myDivider() =>
-    Padding(
+Widget myDivider() => Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
         width: double.infinity,
@@ -98,19 +90,14 @@ Widget myDivider() =>
       ),
     );
 
-
-
-
-void navigateTo(context, widget) =>
-    Navigator.push(
+void navigateTo(context, widget) => Navigator.push(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => widget,
       ),
     );
 
-void navigateAndFinish(context, widget) =>
-    Navigator.pushAndRemoveUntil(
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => widget,
@@ -121,42 +108,42 @@ void navigateAndFinish(context, widget) =>
 void showToast({
   required String text,
   required ToastStates state,
-})=> Fluttertoast.showToast(
-    msg:text,
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 5,
-    backgroundColor:chooseToastColor(state),
-    textColor: Colors.white,
-    fontSize: 16.0
-);
+}) =>
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 5,
+        backgroundColor: chooseToastColor(state),
+        textColor: Colors.white,
+        fontSize: 16.0);
 
-enum ToastStates{SUCCESS,ERROR,WARNING}
+enum ToastStates { success, error, warning }
 
-Color chooseToastColor(ToastStates state)
-{ Color color;
-  switch(state){
-    case ToastStates.SUCCESS:
+Color chooseToastColor(ToastStates state) {
+  Color color;
+  switch (state) {
+    case ToastStates.success:
       color = Colors.green;
       break;
-    case ToastStates.ERROR:
-      color= Colors.red;
+    case ToastStates.error:
+      color = Colors.red;
       break;
-    case ToastStates.WARNING:
-      color=Colors.yellow;
+    case ToastStates.warning:
+      color = Colors.yellow;
       break;
   }
-return color;
+  return color;
 }
 
 Widget buildListProduct(
-    model,
-    context,
-    {bool? isOldPrice=true,
-    })=>
+  model,
+  context, {
+  bool? isOldPrice = true,
+}) =>
     Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Container(
+      child: SizedBox(
         height: 120,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,10 +156,10 @@ Widget buildListProduct(
                   width: 120,
                   height: 120,
                 ),
-                if (model.discount != 0 &&isOldPrice! )
+                if (model.discount != 0 && isOldPrice!)
                   Container(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
                         'DISCOUNT',
                         style: TextStyle(
@@ -185,7 +172,9 @@ Widget buildListProduct(
                   ),
               ],
             ),
-            SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,33 +183,33 @@ Widget buildListProduct(
                     model.name!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       height: 1.3,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
                       Text(
                         '${model.price.round()}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: defaultColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      if (model.discount != 0&&isOldPrice!)
+                      if (model.discount != 0 && isOldPrice!)
                         Text(
                           '${model.oldPrice.round()}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10,
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         alignment: AlignmentDirectional.bottomEnd,
                         onPressed: () {
@@ -229,10 +218,10 @@ Widget buildListProduct(
                         icon: CircleAvatar(
                           radius: 15.0,
                           backgroundColor:
-                          ShopCubit.get(context).favorites[model.id] == true
-                              ? defaultColor
-                              : Colors.grey,
-                          child: Icon(
+                              ShopCubit.get(context).favorites[model.id] == true
+                                  ? defaultColor
+                                  : Colors.grey,
+                          child: const Icon(
                             Icons.favorite_border,
                             size: 14.0,
                             color: Colors.white,

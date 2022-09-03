@@ -31,31 +31,40 @@ class ShopSearchScreen extends StatelessWidget {
                         label: 'Search',
                         type: TextInputType.text,
                         onChanged: (value) {
-                          onChangedValue(value,context);
+                          onChangedValue(value, context);
                         },
                         onValidate: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Write Your Search Hint Word';
                           }
                           return null;
-                        }
-
-
-                        ),
-                    SizedBox(height: 20,),
-                    if(state is SearchLoadingState)
-                    LinearProgressIndicator(),
-                    SizedBox(height: 20,),
-                    if(state is SearchSuccessState)
-                    Expanded(
-                        child: ListView.separated(
-                          itemBuilder: (context,index)=>
-                              buildListProduct(SearchCubit.get(context).model!.data!.data![index],context,isOldPrice: false),
-                          separatorBuilder: (context,index)=>
-                              myDivider(),
-                          itemCount: SearchCubit.get(context).model!.data!.data!.length,
-                        ),
+                        }),
+                    const SizedBox(
+                      height: 20,
                     ),
+                    if (state is SearchLoadingState)
+                      const LinearProgressIndicator(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    if (state is SearchSuccessState)
+                      Expanded(
+                        child: ListView.separated(
+                          itemBuilder: (context, index) => buildListProduct(
+                              SearchCubit.get(context)
+                                  .model!
+                                  .data!
+                                  .data![index],
+                              context,
+                              isOldPrice: false),
+                          separatorBuilder: (context, index) => myDivider(),
+                          itemCount: SearchCubit.get(context)
+                              .model!
+                              .data!
+                              .data!
+                              .length,
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -66,6 +75,7 @@ class ShopSearchScreen extends StatelessWidget {
     );
   }
 }
-void onChangedValue(value,context) {
+
+void onChangedValue(value, context) {
   SearchCubit.get(context).search(value);
 }

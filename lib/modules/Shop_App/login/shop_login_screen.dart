@@ -1,19 +1,20 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/layout/Shop_App/Shop_Layout.dart';
+import 'package:shop_app/layout/Shop_App/shop_layout.dart';
 import 'package:shop_app/modules/Shop_App/login/cubit/cubit.dart';
 import 'package:shop_app/modules/Shop_App/login/cubit/status.dart';
-import 'package:shop_app/modules/Shop_App/register/shop_register_Screen.dart';
+import 'package:shop_app/modules/Shop_App/register/shop_register_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShopLoginScreen extends StatelessWidget {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  ShopLoginScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -23,16 +24,15 @@ class ShopLoginScreen extends StatelessWidget {
           if (state is ShopLoginSuccessState) {
             if (state.loginModel.status!) {
               CacheHelper.saveData(
-                      key: 'token',
-                  value: state.loginModel.data!.token!,
-
+                key: 'token',
+                value: state.loginModel.data!.token!,
               ).then((value) {
                 token = state.loginModel.data!.token!;
-                navigateAndFinish(context, ShopLayout());
+                navigateAndFinish(context, const ShopLayout());
               });
             } else {
               showToast(
-                state: ToastStates.ERROR,
+                state: ToastStates.error,
                 text: state.loginModel.message!,
               );
             }
@@ -57,7 +57,7 @@ class ShopLoginScreen extends StatelessWidget {
                               .headline4!
                               .copyWith(color: Colors.black),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         Text(
@@ -67,7 +67,7 @@ class ShopLoginScreen extends StatelessWidget {
                               .bodyText1!
                               .copyWith(color: Colors.grey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         defaultFormField(
@@ -82,7 +82,7 @@ class ShopLoginScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         defaultFormField(
@@ -112,7 +112,7 @@ class ShopLoginScreen extends StatelessWidget {
                               }
                               return null;
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         ConditionalBuilder(
@@ -132,14 +132,14 @@ class ShopLoginScreen extends StatelessWidget {
                               isUpperCase: true,
                             );
                           },
-                          fallback: (BuildContext context) => Center(
+                          fallback: (BuildContext context) => const Center(
                             child: CircularProgressIndicator(),
                           ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'don\'t have an account?',
                             ),
                             defaultTextButton(

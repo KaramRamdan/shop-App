@@ -1,8 +1,6 @@
-// ignore_for_file: file_names
-// ignore: file_names
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/layout/Shop_App/Shop_Layout.dart';
+import 'package:shop_app/layout/Shop_App/shop_layout.dart';
 
 import 'package:shop_app/modules/Shop_App/register/cubit/cubit.dart';
 import 'package:shop_app/modules/Shop_App/register/cubit/status.dart';
@@ -12,11 +10,13 @@ import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShopRegisterScreen extends StatelessWidget {
-  var emailController = TextEditingController();
-  var nameController = TextEditingController();
-  var phoneController = TextEditingController();
-  var passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  ShopRegisterScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -30,11 +30,11 @@ class ShopRegisterScreen extends StatelessWidget {
                 value: state.loginModel.data!.token!,
               ).then((value) {
                 token = state.loginModel.data!.token!;
-                navigateAndFinish(context, ShopLayout());
+                navigateAndFinish(context, const ShopLayout());
               });
             } else {
               showToast(
-                state: ToastStates.ERROR,
+                state: ToastStates.error,
                 text: state.loginModel.message!,
               );
             }
@@ -59,7 +59,7 @@ class ShopRegisterScreen extends StatelessWidget {
                               .headline4!
                               .copyWith(color: Colors.black),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         Text(
@@ -69,7 +69,7 @@ class ShopRegisterScreen extends StatelessWidget {
                               .bodyText1!
                               .copyWith(color: Colors.grey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         defaultFormField(
@@ -84,7 +84,7 @@ class ShopRegisterScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         defaultFormField(
@@ -99,7 +99,7 @@ class ShopRegisterScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         defaultFormField(
@@ -132,7 +132,7 @@ class ShopRegisterScreen extends StatelessWidget {
                               }
                               return null;
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         defaultFormField(
@@ -147,7 +147,7 @@ class ShopRegisterScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         ConditionalBuilder(
@@ -169,7 +169,7 @@ class ShopRegisterScreen extends StatelessWidget {
                               isUpperCase: true,
                             );
                           },
-                          fallback: (BuildContext context) => Center(
+                          fallback: (BuildContext context) => const Center(
                             child: CircularProgressIndicator(),
                           ),
                         ),

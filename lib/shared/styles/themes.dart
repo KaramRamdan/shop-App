@@ -1,24 +1,21 @@
-// ignore_for_file: file_names
-
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-ThemeData darkTheme= ThemeData(
+ThemeData darkTheme = ThemeData(
   primarySwatch: defaultColor,
   scaffoldBackgroundColor: HexColor('2b2c2c'),
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
       titleSpacing: 20.0,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.black12,
       ),
       backgroundColor: Colors.black26,
       elevation: 0.0,
-      iconTheme:IconThemeData(
+      iconTheme: IconThemeData(
         color: Colors.white,
-      ) ,
+      ),
       actionsIconTheme: IconThemeData(
         color: Colors.white,
       ),
@@ -27,23 +24,23 @@ ThemeData darkTheme= ThemeData(
         fontSize: 22.0,
         fontWeight: FontWeight.bold,
       )),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     selectedItemColor: Colors.white,
     unselectedItemColor: Colors.grey,
     backgroundColor: Colors.black26,
     elevation: 20.0,
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
       bodyText1: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
-      )),
-  fontFamily:'Jannah',
-) ;
-ThemeData lightTheme= ThemeData(
-  primarySwatch:defaultColor,
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  )),
+  fontFamily: 'Jannah',
+);
+ThemeData lightTheme = ThemeData(
+  primarySwatch: defaultColor,
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: AppBarTheme(
       titleSpacing: 20.0,
@@ -52,30 +49,30 @@ ThemeData lightTheme= ThemeData(
       ),
       backgroundColor: Colors.white,
       elevation: 0.0,
-      iconTheme:IconThemeData(
+      iconTheme: const IconThemeData(
         color: Colors.black,
       ),
-      actionsIconTheme: IconThemeData(
+      actionsIconTheme: const IconThemeData(
         color: Colors.black,
       ),
-      titleTextStyle: TextStyle(
+      titleTextStyle: const TextStyle(
         color: Colors.black,
         fontSize: 20.0,
         fontWeight: FontWeight.bold,
       )),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     selectedItemColor: Colors.black,
     unselectedItemColor: Colors.black45,
     backgroundColor: Colors.white54,
     elevation: 20.0,
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyText1: TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
   ),
-  fontFamily:'Jannah',
-) ;
+  fontFamily: 'Jannah',
+);

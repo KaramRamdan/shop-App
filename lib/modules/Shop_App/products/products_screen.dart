@@ -16,12 +16,11 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (context, state) {
-        if (state is ShopSuccessChangeFavoritesState)
-        {
+        if (state is ShopSuccessChangeFavoritesState) {
           if (!state.model.status!) {
             showToast(
               text: state.model.message!,
-              state: ToastStates.ERROR,
+              state: ToastStates.error,
             );
           }
         }
@@ -35,18 +34,17 @@ class ProductsScreen extends StatelessWidget {
             ShopCubit.get(context).categoriesModel,
             context,
           ),
-          fallback: (context) => Center(child: CircularProgressIndicator()),
+          fallback: (context) =>
+              const Center(child: CircularProgressIndicator()),
         );
       },
     );
   }
 
   Widget productsBuilder(
-          HomeModel? model,
-      CategoriesModel? categoriesModel,
-      context) =>
+          HomeModel? model, CategoriesModel? categoriesModel, context) =>
       SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -67,13 +65,13 @@ class ProductsScreen extends StatelessWidget {
                 enableInfiniteScroll: true,
                 reverse: false,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(seconds: 1),
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(seconds: 1),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 scrollDirection: Axis.horizontal,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Padding(
@@ -81,33 +79,33 @@ class ProductsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Categories',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
-                  Container(
+                  SizedBox(
                     height: 100,
                     child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => buildCategoriesItem(
                           categoriesModel!.data!.data![index]),
-                      separatorBuilder: (context, index) => SizedBox(
+                      separatorBuilder: (context, index) => const SizedBox(
                         width: 10,
                       ),
                       itemCount: categoriesModel!.data!.data!.length,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
-                  Text(
+                  const Text(
                     'New Products',
                     style: TextStyle(
                       fontSize: 25,
@@ -117,14 +115,14 @@ class ProductsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Container(
               color: Colors.grey[300],
               child: GridView.count(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
                 crossAxisSpacing: 1.0,
                 childAspectRatio: 1 / 1.58,
@@ -139,8 +137,7 @@ class ProductsScreen extends StatelessWidget {
           ],
         ),
       );
-  Widget buildGridProduct(ProductModel model, context) =>
-      Container(
+  Widget buildGridProduct(ProductModel model, context) => Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,8 +152,8 @@ class ProductsScreen extends StatelessWidget {
                 ),
                 if (model.discount != 0)
                   Container(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
                         'DISCOUNT',
                         style: TextStyle(
@@ -169,7 +166,7 @@ class ProductsScreen extends StatelessWidget {
                   ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -179,7 +176,7 @@ class ProductsScreen extends StatelessWidget {
                     model.name!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       height: 1.3,
                     ),
                   ),
@@ -187,24 +184,24 @@ class ProductsScreen extends StatelessWidget {
                     children: [
                       Text(
                         '${model.price.round()}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: defaultColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       if (model.discount != 0)
                         Text(
                           '${model.oldPrice.round()}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10,
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         alignment: AlignmentDirectional.bottomEnd,
                         onPressed: () {
@@ -216,7 +213,7 @@ class ProductsScreen extends StatelessWidget {
                               ShopCubit.get(context).favorites[model.id] == true
                                   ? defaultColor
                                   : Colors.grey,
-                          child: Icon(
+                          child: const Icon(
                             Icons.favorite_border,
                             size: 14.0,
                             color: Colors.white,
@@ -231,8 +228,7 @@ class ProductsScreen extends StatelessWidget {
           ],
         ),
       );
-  Widget buildCategoriesItem(DataModel model) =>
-      Stack(
+  Widget buildCategoriesItem(DataModel model) => Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           Image(
@@ -247,7 +243,7 @@ class ProductsScreen extends StatelessWidget {
             child: Text(
               model.name!,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
               maxLines: 1,

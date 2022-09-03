@@ -7,20 +7,22 @@ import 'package:shop_app/shared/components/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingScreen extends StatelessWidget {
-  var formKey = GlobalKey<FormState>();
-  var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var phoneController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+
+  SettingScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        token=ShopCubit.get(context).userModel!.data!.token;
-        var model=ShopCubit.get(context).userModel;
-        nameController.text=model!.data!.name!;
-        emailController.text=model.data!.email!;
-        phoneController.text=model.data!.phone!;
+        token = ShopCubit.get(context).userModel!.data!.token;
+        var model = ShopCubit.get(context).userModel;
+        nameController.text = model!.data!.name!;
+        emailController.text = model.data!.email!;
+        phoneController.text = model.data!.phone!;
         return ConditionalBuilder(
           condition: ShopCubit.get(context).userModel != null,
           builder: (context) => Padding(
@@ -31,9 +33,9 @@ class SettingScreen extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      if(state is ShopLoadingUpdateUserState)
-                      LinearProgressIndicator(),
-                      SizedBox(
+                      if (state is ShopLoadingUpdateUserState)
+                        const LinearProgressIndicator(),
+                      const SizedBox(
                         height: 20,
                       ),
                       defaultFormField(
@@ -48,7 +50,7 @@ class SettingScreen extends StatelessWidget {
                         type: TextInputType.name,
                         label: 'User Name',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       defaultFormField(
@@ -63,7 +65,7 @@ class SettingScreen extends StatelessWidget {
                         type: TextInputType.emailAddress,
                         label: 'Email Address',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       defaultFormField(
@@ -78,26 +80,22 @@ class SettingScreen extends StatelessWidget {
                         type: TextInputType.phone,
                         label: 'Phone Number',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       defaultButton(
-                        function: () {
-                          if(formKey.currentState!.validate())
-                            {
+                          function: () {
+                            if (formKey.currentState!.validate()) {
                               ShopCubit.get(context).updateUserData(
-                              name: nameController.text,
-                              phone: phoneController.text,
-                              email: emailController.text,
-                            );
-
+                                name: nameController.text,
+                                phone: phoneController.text,
+                                email: emailController.text,
+                              );
                             }
-
-                        },
-                        text: 'update',
-                          radius: 30
-                      ),
-                      SizedBox(
+                          },
+                          text: 'update',
+                          radius: 30),
+                      const SizedBox(
                         height: 20,
                       ),
                       defaultButton(
@@ -105,10 +103,9 @@ class SettingScreen extends StatelessWidget {
                           signOut(context);
                         },
                         text: 'logout',
-                          textColor:Colors.white,
+                        textColor: Colors.white,
                         radius: 30,
                         background: Colors.red.shade300,
-
                       ),
                     ],
                   ),
@@ -116,7 +113,8 @@ class SettingScreen extends StatelessWidget {
               ),
             ),
           ),
-          fallback: (context) => Center(child: CircularProgressIndicator()),
+          fallback: (context) =>
+              const Center(child: CircularProgressIndicator()),
         );
       },
     );
