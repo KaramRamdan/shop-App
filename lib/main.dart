@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/Shop_App/Shop_Layout.dart';
 import 'package:shop_app/modules/Shop_App/login/shop_login_screen.dart';
@@ -41,26 +40,26 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Widget? startWidget;
-  MyApp({
+  const MyApp({
     this.startWidget,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ShopCubit()
-          ..getUserData()
-         ,
-        child: BlocConsumer<ShopCubit, ShopStates>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return MaterialApp(
-                  title: 'Shop App',
-                  debugShowCheckedModeBanner: false,
-                  theme: lightTheme,
-                  darkTheme: darkTheme,
-                  themeMode: ThemeMode.light,
-                  home: startWidget);
-            }));
+      create: (context) => ShopCubit()..getUserData(),
+      child: BlocConsumer<ShopCubit, ShopStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+              title: 'Shop App',
+              debugShowCheckedModeBanner: false,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: ThemeMode.light,
+              home: startWidget);
+        },
+      ),
+    );
   }
 }
