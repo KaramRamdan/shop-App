@@ -45,6 +45,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   fluttertoast: ^8.0.9
   carousel_slider: ^4.1.1
+  win32: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +72,7 @@ flutter:
   fonts:
     - family: Jannah
       fonts:
-        - asset: assets/fonts/jannah.ttf
+        - asset: assets/fonts/Jannah.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
